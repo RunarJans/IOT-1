@@ -22,7 +22,7 @@ jobs:
 
     - name: CC
       run: |
-        arm-linux-gnueabihf-gcc -o out.exe main.c
+        arm-linux-gnueabihf-gcc -o out.exe helloworld.c
 
     - name: upload artifact
       uses: actions/upload-artifact@v2
