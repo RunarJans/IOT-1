@@ -23,4 +23,4 @@ jobs:
       run: sudo apt install --yes {gcc,binutils}-arm-linux-gnueabihf 
        
     - name: compile code
-      run: arm-linux-gnueabihf-gcc -o out.exe HelloWorld.c
+      run: arm-linux-gnueabihf-gcc -o out.exe helloworld.c
