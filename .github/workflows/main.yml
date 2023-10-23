@@ -1,18 +1,26 @@
-name: Build and Test
+name: cc
+
 on:
   push:
     branches:
-      - main
-
+      -  main
+  pull_request:
+    branches:
+      -  main
+      
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check out code
+    - name: Check out the code
       uses: actions/checkout@v2
-
-    - name: Build C/C++ program
-      run: |
-        g++ helloworld.c -o helloworld
-        ./helloworld
+      
+    - name: install Arm cross compiler
+      run: sudo apt-get update
+      
+    - name: install Arm cross compiler
+      run: sudo apt install --yes {gcc,binutils}-arm-linux-gnueabihf 
+       
+    - name: compile code
+      run: arm-linux-gnueabihf-gcc -o out.exe HelloWorld.c
