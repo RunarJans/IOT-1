@@ -4,21 +4,32 @@ on:
   push:
     branches:
       -  main
-
-        
 jobs:
   build:
     runs-on: ubuntu-latest
-
+        
     steps:
-    - name: Check out the code
-      uses: actions/checkout@v2
-      
-    - name: cross compiler install
-      run: sudo apt-get update
-      
-    - name: install Arm cross compiler
-      run: sudo apt install --yes {gcc,binutils}-arm-linux-gnueabihf 
-       
-    - name: compile code
-      run: arm-linux-gnueabihf-gcc -o out.exe helloworld.c
+    - name: check code
+      uses: actions/checkout@v3
+
+    - name: Update Apt 
+      run: |
+        sudo apt-get update
+
+    - name: install arm cros compiler
+      run: |
+        sudo apt-get install --yes {gcc,binutils}-arm-linux-gnueabihf
+
+    - name: CC
+      run: |
+        arm-linux-gnueabihf-gcc -o out.exe main.c
+
+    - name: upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: gecompilede artifacts
+        path: out.exe
+
+    - name: saved path
+      id: binary-path
+      run: echo "::set-output name=binary_path::out.exe"
