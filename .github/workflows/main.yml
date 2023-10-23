@@ -30,6 +30,4 @@ jobs:
         name: gecompilede artifacts
         path: out.exe
 
-    - name: saved path
-      id: binary-path
-      run: echo "::set-output name=binary_path::out.exe"
+ 
